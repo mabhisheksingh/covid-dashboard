@@ -1,0 +1,14 @@
+###Request1
+#Get All COVID DATA
+GET http://localhost:9091/V1/get
+
+
+###
+#Get All Covid19 data
+GET http://localhost:9091/V1/getAllCovid19Data
+
+
+# GET http://localhost:9091/V1/get
+# GET http://localhost:9091/V1/get
+
+# http://localhost:9091/V1/getCovid19GlobalData

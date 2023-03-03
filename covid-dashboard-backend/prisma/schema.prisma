@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model WhoCovidData {
+  Name                                                       String  @id @db.VarChar(255)
+  WHO_Region                                                 String? @default("") @map("WHO Region") @db.VarChar(255)
+  Cases_cumulative_total                                     BigInt? @map("Cases - cumulative total")
+  Cases_cumulative_total_per_100000_population               BigInt? @map("Cases - cumulative total per 100000 population")
+  Cases_newly_reported_in_last_7_days                        BigInt? @default(0) @map("Cases - newly reported in last 7 days")
+  Cases_newly_reported_in_last_7_days_per_100000_population  BigInt? @default(0) @map("Cases - newly reported in last 7 days per 100000 population")
+  Cases_newly_reported_in_last_24_hours                      BigInt? @default(0) @map("Cases - newly reported in last 24 hours")
+  Deaths_cumulative_total                                    BigInt? @default(0) @map("Deaths - cumulative total")
+  Deaths_cumulative_total_per_100000_population              BigInt? @default(0) @map("Deaths - cumulative total per 100000 population")
+  Deaths_newly_reported_in_last_7_days                       BigInt? @default(0) @map("Deaths - newly reported in last 7 days")
+  Deaths_newly_reported_in_last_7_days_per_100000_population BigInt? @default(0) @map("Deaths - newly reported in last 7 days per 100000 population")
+  Deaths_newly_reported_in_last_24_hours                     BigInt? @default(0) @map("Deaths - newly reported in last 24 hours")
+
+  @@map("who_covid_data")
+}
+
+model who_covid19_data {
+  Date_reported     String  @db.VarChar(255)
+  Country_code      String? @default("") @db.VarChar(10)
+  Country           String  @default("") @db.VarChar(255)
+  WHO_region        String? @default("") @db.VarChar(50)
+  New_cases         BigInt? @default(0)
+  Cumulative_cases  BigInt? @default(0)
+  New_deaths        BigInt? @default(0)
+  Cumulative_deaths BigInt? @default(0)
+
+  @@id([Date_reported, Country])
+}
